@@ -5,6 +5,8 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCat, setSelecedCat] = useState('All');
+  const [newTaskInput, setNewTaskInput] = useState('')
+  const [lastID, setLastID] = useState()
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -14,11 +16,24 @@ function App() {
     // Store categories
     localStorage.setItem('categories', JSON.stringify(CATEGORIES));
     setCategories(JSON.parse(localStorage.getItem('categories')));
+    // 
   }, []);
 
   const handleAddTask = (e) => {
     e.preventDefault();
+    fetch(``, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    console.log(JSON.stringify({
+      id: 
+      selectedCat, 
+      newTaskInput,
+      checked: false
+    }))
   };
+  console.log(newTaskInput)
+  console.log(selectedCat)
 
   return (
     <div className='App'>
@@ -38,7 +53,7 @@ function App() {
                 );
               })}
             </select>
-            <input type='text' placeholder='Add Task' autoFocus />
+            <input type='text' placeholder='Add Task' autoFocus value={newTaskInput} onChange={(e) => setNewTaskInput(e.target.value)} />
             <button type='submit'>+</button>
           </div>
         </form>
